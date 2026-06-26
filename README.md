@@ -10,8 +10,6 @@ Xinwei Long<sup>1*</sup>, Kai Tian<sup>1*</sup>, Peng Xu<sup>1</sup>, Weibo Gao<
 
 $^{1}$ **Tsinghua University** &nbsp;&nbsp; $^{2}$ **Shanghai AI Lab** &nbsp;&nbsp; $^{3}$ **Peking University** &nbsp;&nbsp; $^{4}$ **USTC** &nbsp;&nbsp; $^{5}$ **CASIA** &nbsp;&nbsp; $^{6}$ **Independent Researcher**
 
-<sup>*</sup> Equal Contribution &nbsp;&nbsp; <sup>+</sup> corresponding authors
-
 <br>
 
 <sup>*</sup> Equal Contribution &nbsp;&nbsp; <sup>+</sup> Corresponding Authors
@@ -53,6 +51,23 @@ WebOne is designed around this setting. The benchmark contains websites from mul
 </p>
 
 ---
+
+## 📂 Repository Structure
+.
+├── assets/                  # Images, figures, and static assets for README/documentation
+├── dataset_construction/    # Codebase for data curation and tutorial distillation
+│   ├── pipeline/            # "Capture-and-Refine" pipeline implementation
+│   ├── annotation/          # Human demonstration and trajectory filter scripts
+│   └── templates/           # Proforma templates for image-text interleaving
+├── evaluation/              # Benchmark evaluation scripts and metrics calculation
+│   ├── evaluators/          # Domain-specific scoring functions (e-commerce, travel, etc.)
+│   ├── run_eval.sh          # Batch evaluation entry point
+│   └── statistics.py        # Error analysis and success rate calculators
+└── weblearner/              # Core source code of the WebLearner Agent
+    ├── agent/               # Actor-critic network definition and model wrappers
+    ├── memory/              # Hierarchical memory system (Buffer, Tracker, KB)
+    ├── rl/                  # Reinforcement learning training loops and reward functions
+    └── configs/             # Hyperparameters and training configuration files
 
 ## WebLearner
 
