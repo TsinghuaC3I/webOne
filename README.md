@@ -1,6 +1,4 @@
-<p align="center">
-    <img src="./assets/eccv_fig1.png" alt="WebOne overview and statistics"/> <br />
-</p>
+
 
 # Guiding the Blind: Generalizing GUI Agents to Unseen Websites via Multimodal Tutorials
 
@@ -8,13 +6,15 @@
 
 ---
 
-Xinwei Long$^{1}$, Kai Tian$^{1}$, Peng Xu$^{1}$, Weibo Gao$^{3}$, Yihua Shao$^{4}$, Guoli Jia$^{1}$, Haozhe Geng$^{2}$, Sa Yang$^{2}$, Jingxuan Li$^{1}$, Huayong Hu$^{1}$, Kaiyan Zhang$^{1}$, Jiaqi Wang$^{1}$, Bowen Zhou$^{1}$
+Xinwei Long<sup>1</sup>, Kai Tian<sup>1</sup>, Peng Xu<sup>1</sup>, Weibo Gao<sup>3</sup>, Yihua Shao<sup>4</sup>, Guoli Jia<sup>1</sup>, Haozhe Geng<sup>3</sup>, Sa Yang<sup>3</sup>, Jingxuan Li<sup>6</sup>, Huayong Hu<sup>6</sup>, Kaiyan Zhang<sup>1</sup>, Jiaqi Wang<sup>2</sup>, Bowen Zhou<sup>1,2</sup>
 
 $^{1}$ **Tsinghua University** &nbsp;&nbsp; $^{2}$ **Shanghai AI Lab** &nbsp;&nbsp; $^{3}$ **Peking University** &nbsp;&nbsp; $^{4}$ **USTC** &nbsp;&nbsp; $^{5}$ **CASIA** &nbsp;&nbsp; $^{6}$ **Independent Researcher**
 
 ---
 
----
+<p align="center">
+    <img src="./assets/eccv_fig1.png" alt="WebOne overview and statistics"/> <br />
+</p>
 
 Large Multimodal Models have pushed GUI agents forward, but most existing web agents still behave like "blind" explorers on unseen websites. They often depend on patterns memorized from in-domain training data, which makes them fragile when the interface changes or when the target site has never appeared during training.
 
