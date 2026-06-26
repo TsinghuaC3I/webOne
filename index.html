@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guiding the Blind | ECCV 2026</title>
+  <style>
+    :root {
+      --bg: #f4efe7;
+      --paper: #fffdfa;
+      --paper-strong: #f2e4d1;
+      --ink: #1e1915;
+      --muted: #665d56;
+      --accent: #9e241d;
+      --accent-soft: #e7c8a8;
+      --accent-gold: #cf9b3b;
+      --panel: #ede2d4;
+      --dark: #202831;
+      --dark-panel: #2a3440;
+      --dark-soft: #d8e1ed;
+      --line: rgba(30, 25, 21, 0.12);
+      --shadow: 0 20px 60px rgba(51, 31, 17, 0.12);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(207, 155, 59, 0.12), transparent 30%),
+        linear-gradient(180deg, #f8f4ee 0%, var(--bg) 40%, #f7f2eb 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+    }
+
+    .section {
+      padding: 76px 20px;
+    }
+
+    .section.light {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(250, 244, 236, 0.92));
+      color: var(--ink);
+    }
+
+    .section.dark {
+      background:
+        linear-gradient(180deg, rgba(246, 238, 228, 0.96), rgba(239, 230, 219, 0.96));
+      color: var(--ink);
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding-top: 44px;
+    }
+
+    .hero-shell {
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+      border-radius: 32px;
+      border: 1px solid rgba(158, 36, 29, 0.12);
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.92), rgba(255, 248, 240, 0.85)),
+        linear-gradient(180deg, rgba(231, 200, 168, 0.35), rgba(255, 255, 255, 0.2));
+      box-shadow: var(--shadow);
+    }
+
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      inset: -120px auto auto -80px;
+      width: 280px;
+      height: 280px;
+      border-radius: 999px;
+      background: rgba(207, 155, 59, 0.18);
+      filter: blur(10px);
+    }
+
+    .hero-shell::after {
+      content: "";
+      position: absolute;
+      inset: auto -90px -100px auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 999px;
+      background: rgba(158, 36, 29, 0.12);
+      filter: blur(10px);
+    }
+
+    .hero-copy,
+    .section-heading {
+      position: relative;
+      z-index: 1;
+    }
+
+    .kicker {
+      margin: 0 0 12px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.15;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      font-size: clamp(2.5rem, 5vw, 4.3rem);
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      letter-spacing: -0.03em;
+    }
+
+    h3 {
+      font-size: 1.28rem;
+    }
+
+    .hero-subtitle {
+      max-width: 920px;
+      margin: 0 auto 20px;
+      text-align: center;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .section-intro {
+      max-width: 880px;
+      font-size: 1.05rem;
+      color: inherit;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .meta-line {
+      margin: 10px 0 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 28px 0 24px;
+    }
+
+    .tag {
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(158, 36, 29, 0.12);
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--ink);
+      font-size: 0.92rem;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(57, 35, 23, 0.06);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(158, 36, 29, 0.14);
+      background: linear-gradient(180deg, rgba(255, 248, 240, 0.98), rgba(245, 228, 209, 0.98));
+      color: var(--ink);
+      font-weight: 700;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--ink);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(180deg, rgba(255, 251, 245, 1), rgba(237, 214, 189, 1));
+      border-color: rgba(158, 36, 29, 0.24);
+    }
+
+    .figure-frame,
+    .card,
+    .metric,
+    .quote,
+    .table-shell {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .figure-frame {
+      position: relative;
+      z-index: 1;
+      margin-top: 20px;
+      padding: 16px;
+      border: 1px solid rgba(30, 25, 21, 0.08);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .figure-frame.dark-frame {
+      border-color: rgba(30, 25, 21, 0.08);
+      background: linear-gradient(180deg, rgba(255, 250, 245, 0.92), rgba(247, 239, 230, 0.92));
+    }
+
+    .figure-caption {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .dark .figure-caption,
+    .dark .muted {
+      color: var(--muted);
+    }
+
+    .quote {
+      margin-top: 26px;
+      padding: 24px 26px;
+      border: 1px solid rgba(30, 25, 21, 0.08);
+      background: linear-gradient(180deg, rgba(255, 248, 240, 0.98), rgba(242, 232, 218, 0.98));
+      font-size: 1.08rem;
+    }
+
+    .quote strong {
+      color: var(--accent);
+    }
+
+    .grid-2,
+    .grid-3,
+    .dual {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1.02fr 0.98fr;
+      align-items: start;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .dual {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .dark .card {
+      border-color: var(--line);
+      background: rgba(255, 252, 248, 0.9);
+    }
+
+    .card p:last-child,
+    .card ul:last-child {
+      margin-bottom: 0;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .metric {
+      padding: 20px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(247, 239, 230, 0.86));
+    }
+
+    .metric .value {
+      display: block;
+      margin-bottom: 6px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .metric .label {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .table-shell {
+      overflow-x: auto;
+      padding: 12px;
+      border: 1px solid rgba(30, 25, 21, 0.08);
+      background: rgba(255, 252, 248, 0.92);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+    }
+
+    th,
+    td {
+      padding: 13px 14px;
+      border-bottom: 1px solid rgba(30, 25, 21, 0.08);
+      text-align: left;
+      font-size: 0.96rem;
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tr.highlight td {
+      background: rgba(231, 200, 168, 0.34);
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .insight-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .insight {
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(30, 25, 21, 0.08);
+      background: rgba(255, 252, 248, 0.9);
+    }
+
+    .insight strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 1.02rem;
+    }
+
+    .note {
+      margin-top: 14px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .footer-note {
+      padding-top: 10px;
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .grid-2,
+      .grid-3,
+      .dual {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-shell {
+        padding: 24px;
+      }
+
+      .section {
+        padding: 64px 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .button {
+        width: 100%;
+      }
+
+      .metric .value {
+        font-size: 1.7rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="section light hero">
+    <div class="container">
+      <div class="hero-shell">
+        <div class="hero-copy">
+          <p class="kicker center">ECCV 2026 Review Submission #5069</p>
+          <h1>Guiding the Blind: Generalizing GUI Agents to Unseen Websites via Multimodal Tutorials</h1>
+          <p class="hero-subtitle">
+            A large-scale benchmark designed to evaluate an agent's ability to master unseen websites by referencing
+            multimodal tutorials derived from instructional videos, historical trajectories, and human demonstrations.
+          </p>
+          <div class="tags">
+            <span class="tag">1,342 Real-World Tasks</span>
+            <span class="tag">970 Multimodal Tutorials</span>
+            <span class="tag">60 Websites</span>
+            <span class="tag">Held-Out Website Evaluation</span>
+            <span class="tag">56.9% Success Rate</span>
+            <span class="tag">Hierarchical Memory + GRPO</span>
+          </div>
+          <div class="button-row">
+            <a class="button" href="#abstract">Abstract</a>
+            <a class="button secondary" href="#benchmark">WebOne Benchmark</a>
+            <a class="button secondary" href="ECCV_apdx.pdf">Appendix PDF</a>
+            <a class="button secondary" href="case_study.pdf">Case Study PDF</a>
+            <a class="button secondary" href="eccv_appendix_case4.pdf">Tutorial Samples</a>
+          </div>
+          <p class="meta-line">
+            Keywords: Web GUI Agents, Large Multimodal Models, Benchmark
+          </p>
+        </div>
+        <div class="figure-frame">
+          <img src="assets/eccv_fig1.png" alt="WebOne overview and statistics figure">
+          <p class="figure-caption">
+            WebOne overview and statistics: generalization challenges, dataset construction, action distribution, and held-out websites.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="abstract">
+    <div class="container">
+      <div class="section-heading">
+        <p class="kicker">Abstract</p>
+        <h2>From Blind Execution to Informed Navigation</h2>
+      </div>
+      <p class="section-intro">
+        Despite the remarkable progress of Large Multimodal Models (LMMs), deploying autonomous agents to navigate web
+        Graphical User Interfaces (GUIs) remains a significant challenge. Most existing agents are "blind" when
+        encountering unfamiliar websites, as they rely heavily on patterns memorized during in-domain training, which
+        inevitably fails in the open-world web. To bridge this generalization gap, the paper introduces <strong>WebOne</strong>,
+        a benchmark designed to evaluate an agent's ability to master unseen websites by referencing multimodal tutorials
+        derived from instructional videos, historical trajectories, and human demonstrations. Building on this dataset,
+        the paper proposes <strong>WebLearner</strong>, a reinforcement learning-based framework with hierarchical
+        referencing that synthesizes information from these tutorials.
+      </p>
+      <div class="quote">
+        <strong>Key claim from the paper:</strong> introducing external multimodal tutorials is the key to transforming
+        blind execution into informed navigation, providing a promising path toward truly generalized web GUI agents.
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="benchmark">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <p class="kicker">Benchmark</p>
+          <h2>WebOne: A Held-Out Website Benchmark</h2>
+          <p class="section-intro">
+            WebOne is introduced as a comprehensive web GUI benchmark derived from 1,342 online tasks across 60
+            real-world websites. The dataset is split by website so that the training and test sets are disjoint,
+            requiring true cross-website generalization rather than memorization. The tutorial repository is built from
+            expert demonstrations, public instructional videos, and successful experiences from specialized agents.
+          </p>
+          <div class="metrics">
+            <div class="metric">
+              <span class="value">637</span>
+              <span class="label">Training tasks</span>
+            </div>
+            <div class="metric">
+              <span class="value">705</span>
+              <span class="label">Held-out test tasks</span>
+            </div>
+            <div class="metric">
+              <span class="value">9</span>
+              <span class="label">Website domains</span>
+            </div>
+            <div class="metric">
+              <span class="value">4-5</span>
+              <span class="label">Screenshots per tutorial</span>
+            </div>
+            <div class="metric">
+              <span class="value">5-7</span>
+              <span class="label">Atomic actions per trajectory</span>
+            </div>
+            <div class="metric">
+              <span class="value">&gt;50%</span>
+              <span class="label">Click-action share</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Capture-and-Refine Tutorial Construction</h3>
+            <p>
+              Redundant low-level events are filtered first, and then an LMM summarizes the remaining steps into a
+              sequence of screenshots paired with procedural descriptions. The result is a tutorial format that captures
+              the general logic of a website rather than brittle action coordinates.
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="figure-frame">
+            <img src="assets/ECCV_apdx.png" alt="Appendix statistics of the WebOne dataset and annotation pipeline">
+            <p class="figure-caption">
+              Appendix statistics: domain split, diversity analysis, and the multi-agent annotation pipeline.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="container">
+      <div class="section-heading">
+        <p class="kicker">Motivation</p>
+        <h2>Why Existing GUI Agents Fail on Unseen Websites</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Generalization Gap</h3>
+          <p>
+            Existing agents still face a generalization gap when deployed to unseen websites or when UI layouts change.
+            In unfamiliar environments, they struggle to map high-level intent to local web elements, which often
+            results in action hallucinations or task failure.
+          </p>
+        </div>
+        <div class="card">
+          <h3>External Knowledge Is Noisy</h3>
+          <p>
+            Prior work has explored instructional videos and blogs, but automated agents still struggle to use
+            heterogeneous, sparse, and noisy external knowledge effectively. It remains unclear whether failures come
+            from poor guidance or weak active learning ability.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Human-Like Referencing</h3>
+          <p>
+            The paper argues that the key lies in learning to follow external guidance the way humans do: analyzing the
+            current state, retrieving relevant instructions, and applying them dynamically while navigating a new
+            interface.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="method">
+    <div class="container">
+      <div class="section-heading">
+        <p class="kicker">Method</p>
+        <h2>WebLearner: Hierarchical Memory with Reinforced Training</h2>
+      </div>
+      <div class="figure-frame">
+        <img src="assets/WebLearner.png" alt="WebLearner methodology overview">
+        <p class="figure-caption">
+          Method overview: short-term observation buffer, dynamic task progress tracker, multimodal knowledge base, and GRPO-based optimization.
+        </p>
+      </div>
+      <div class="grid-3" style="margin-top: 22px;">
+        <div class="card">
+          <h3>Short-Term Observational Buffer</h3>
+          <p>
+            Stores raw visual inputs and structured semantic metadata from the most recent interaction steps, helping the
+            agent capture temporal UI changes such as pop-ups and loading states.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Dynamic Task Progress Tracker</h3>
+          <p>
+            Maintains a running summary of completed sub-goals and failed attempts so the agent can preserve intra-task
+            consistency and avoid repetitive behavior on long-horizon tasks.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Multimodal Knowledge Base</h3>
+          <p>
+            Retrieves image-text interleaved tutorials through BM25 retrieval and generative reranking, injecting
+            high-quality external guidance for zero-shot generalization to unseen websites.
+          </p>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top: 22px;">
+        <div class="card">
+          <h3>Three Core Subtasks Per Step</h3>
+          <ul>
+            <li>Memory analysis and summarization over observations, progress, and tutorials.</li>
+            <li>Tutorial-based skill learning through explicit reference identification.</li>
+            <li>Reasoning integration and executable action generation.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Reward Modeling</h3>
+          <ul>
+            <li>Format reward for structured output tags.</li>
+            <li>Reference reward for matching relevant tutorial subtasks.</li>
+            <li>Action reward for action type, argument, and location correctness.</li>
+          </ul>
+          <p class="note">
+            In the main experiments, the base model is Qwen3-VL-8B with the visual backbone frozen and only the language model fine-tuned.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="results">
+    <div class="container">
+      <div class="section-heading">
+        <p class="kicker">Results</p>
+        <h2>Strong Open-Source Gains on Held-Out Websites</h2>
+      </div>
+      <p class="section-intro">
+        On WebOne, WebLearner reaches an overall task success rate of <strong>56.9%</strong>, which is <strong>20.1%</strong>
+        higher than Qwen3-VL-8B under the same setting. The paper reports state-of-the-art results among open-source
+        models and competitive performance against strong proprietary baselines in vanilla settings.
+      </p>
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Setting</th>
+              <th>Overall Success Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GPT-5</td>
+              <td>Vanilla</td>
+              <td>37.1%</td>
+            </tr>
+            <tr>
+              <td>Claude-sonnet-4-6</td>
+              <td>RAG</td>
+              <td>53.2%</td>
+            </tr>
+            <tr>
+              <td>Gemini-2.5-Pro</td>
+              <td>RAG</td>
+              <td>65.1%</td>
+            </tr>
+            <tr>
+              <td>WorldGUI (w/Gemini)</td>
+              <td>RAG</td>
+              <td>63.1%</td>
+            </tr>
+            <tr>
+              <td>Qwen3-VL-8B</td>
+              <td>RAG</td>
+              <td>36.8%</td>
+            </tr>
+            <tr class="highlight">
+              <td>WebLearner (Ours)</td>
+              <td>RAG</td>
+              <td>56.9%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insight-strip">
+        <div class="insight">
+          <strong>Proprietary models also improve</strong>
+          The paper reports over 11% gains for proprietary models when multimodal tutorials are added, showing the quality of the curated tutorials.
+        </div>
+        <div class="insight">
+          <strong>Plain Qwen3-VL-8B does not benefit</strong>
+          Without SFT or RL, Qwen3-VL-8B tends to focus on local context and ignore tutorials, dropping from 37.8% to 36.8%.
+        </div>
+        <div class="insight">
+          <strong>Complex websites remain hard</strong>
+          Lower-performing websites such as ESPN, arXiv, and Booking contain multi-constraint instructions that require more careful planning.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <p class="kicker">Ablation</p>
+          <h2>What Drives the Gains</h2>
+          <div class="metrics">
+            <div class="metric">
+              <span class="value">44.6%</span>
+              <span class="label">Without tutorials</span>
+            </div>
+            <div class="metric">
+              <span class="value">46.0%</span>
+              <span class="label">Without progress tracker</span>
+            </div>
+            <div class="metric">
+              <span class="value">48.4%</span>
+              <span class="label">Without reference reward</span>
+            </div>
+            <div class="metric">
+              <span class="value">43.0%</span>
+              <span class="label">Without format reward</span>
+            </div>
+            <div class="metric">
+              <span class="value">47.1%</span>
+              <span class="label">Text-only tutorials</span>
+            </div>
+            <div class="metric">
+              <span class="value">42.3%</span>
+              <span class="label">SFT instead of RFT</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Main Takeaways</h3>
+            <p>
+              Removing multimodal tutorials hurts cross-website generalization, removing the progress tracker causes
+              repeated mistakes, and removing the reference reward makes the model much worse at learning from tutorials.
+              Replacing reinforced fine-tuning with supervised fine-tuning drops performance by 14.6%.
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="figure-frame">
+            <img src="assets/eccv_fig3.png" alt="Case study comparing Qwen3-VL-8B and WebLearner">
+            <p class="figure-caption">
+              Case study on arXiv: the baseline fails to satisfy the full search requirement, while WebLearner completes the task successfully.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="container">
+      <div class="section-heading">
+        <p class="kicker">Tutorials</p>
+        <h2>Multimodal Tutorials as External Expertise</h2>
+      </div>
+      <div class="figure-frame dark-frame">
+        <img src="assets/eccv_appendix_case4.png" alt="Two multimodal tutorial examples for arXiv and Booking">
+        <p class="figure-caption">
+          Tutorial examples for arXiv and Booking: each tutorial contains five subtasks with screenshots, procedural descriptions, and alternative suggestions.
+        </p>
+      </div>
+      <div class="grid-3" style="margin-top: 22px;">
+        <div class="card">
+          <h3>Information-Dense Guidance</h3>
+          <p>
+            The paper argues that tutorials are far more efficient than raw videos because they preserve only the
+            essential interface transitions and procedural steps.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Cross-Benchmark Transfer</h3>
+          <p>
+            On VideoWebArena, WebLearner reaches 48.3% overall. On Multimodal Mind2Web, it reports SSR scores of 53.4
+            on Cross Task, 51.9 on Cross Website, and 54.0 on Cross Domain.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Missing-Tutorial Robustness</h3>
+          <p>
+            The training setup intentionally includes irrelevant or missing tutorials, so the model can still act using
+            internal knowledge when retrieval returns no suitable tutorial.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <div class="section-heading">
+        <p class="kicker">Failure and Success</p>
+        <h2>Two Appendix Cases from the ECCV Draft</h2>
+      </div>
+      <div class="dual">
+        <div class="figure-frame">
+          <img src="assets/eccv_appendix_case1.png" alt="Failed baseline case on arXiv">
+          <p class="figure-caption">
+            Failed baseline case: the agent follows a tutorial but still retrieves a result from the wrong section and receives a NOT SUCCESS verdict.
+          </p>
+        </div>
+        <div class="figure-frame">
+          <img src="assets/eccv_appendix_case3.png" alt="Successful WebLearner case on Booking">
+          <p class="figure-caption">
+            Successful WebLearner case: on Booking, the model applies tutorial guidance and satisfies the task constraints that the baseline misses.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="container">
+      <div class="section-heading">
+        <p class="kicker">Conclusion</p>
+        <h2>A Path Toward Truly Generalized Web GUI Agents</h2>
+      </div>
+      <p class="section-intro">
+        The paper concludes by framing WebLearner as a hierarchical memory framework that uses multimodal tutorials to
+        enhance test-time generalizability for web GUI agents navigating dynamic and unfamiliar environments. Its three
+        central contributions are the WebOne benchmark, the RL-based WebLearner agent, and empirical evaluations that
+        show strong gains over baseline models on unseen websites.
+      </p>
+    </div>
+  </section>
+</body>
+</html>
