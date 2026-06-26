@@ -6,9 +6,13 @@
 
 *Keywords: Web GUI Agents, Large Multimodal Models, Unseen Website Generalization, Multimodal Tutorials, Reinforcement Learning*
 
-This repository corresponds to the paper **Guiding the Blind: Generalizing GUI Agents to Unseen Websites via Multimodal Tutorials**.
+---
 
-The current draft is an **anonymous ECCV 2026 review submission (#5069)**, so the author information is intentionally omitted in the paper source.
+Xinwei Long$^{1}$, Kai Tian$^{1}$, Peng Xu$^{1}$, Weibo Gao$^{3}$, Yihua Shao$^{4}$, Guoli Jia$^{1}$, Haozhe Geng$^{2}$, Sa Yang$^{2}$, Jingxuan Li$^{1}$, Huayong Hu$^{1}$, Kaiyan Zhang$^{1}$, Jiaqi Wang$^{1}$, Bowen Zhou$^{1}$
+
+$^{1}$ **Tsinghua University** &nbsp;&nbsp; $^{2}$ **Shanghai AI Lab** &nbsp;&nbsp; $^{3}$ **Peking University** &nbsp;&nbsp; $^{4}$ **USTC** &nbsp;&nbsp; $^{5}$ **CASIA** &nbsp;&nbsp; $^{6}$ **Independent Researcher**
+
+---
 
 ---
 
