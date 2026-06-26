@@ -10,8 +10,6 @@ $^{1}$ Tsinghua University &nbsp;&nbsp; $^{2}$ Shanghai AI Lab &nbsp;&nbsp; $^{3
 
 <sup>*</sup> Equal Contribution &nbsp;&nbsp; <sup>+</sup> Corresponding Authors
 
----
-
 <p align="center">
     🔗 <b>[<a href="https://arxiv.org/abs/URL_HERE">arXiv Paper</a>]</b> 
     &nbsp;&nbsp;&nbsp;&nbsp;📊 <b>[<a href="https://huggingface.co/datasets/URL_HERE">WebOne Dataset</a>]</b> 
@@ -48,25 +46,6 @@ WebOne is designed around this setting. The benchmark contains websites from mul
 
 ---
 
-## 📂 Repository Structure
-```text
-.
-├── assets/                  # Images, figures, and static assets for README/documentation
-├── dataset_construction/    # Codebase for data curation and tutorial distillation
-│   ├── pipeline/            # "Capture-and-Refine" pipeline implementation
-│   ├── annotation/          # Human demonstration and trajectory filter scripts
-│   └── templates/           # Proforma templates for image-text interleaving
-├── evaluation/              # Benchmark evaluation scripts and metrics calculation
-│   ├── evaluators/          # Domain-specific scoring functions (e-commerce, travel, etc.)
-│   ├── run_eval.sh          # Batch evaluation entry point
-│   └── statistics.py        # Error analysis and success rate calculators
-└── weblearner/              # Core source code of the WebLearner Agent
-    ├── agent/               # Actor-critic network definition and model wrappers
-    ├── memory/              # Hierarchical memory system (Buffer, Tracker, KB)
-    ├── rl/                  # Reinforcement learning training loops and reward functions
-    └── configs/             # Hyperparameters and training configuration files
-```
-
 ## WebLearner
 
 To make tutorial following practical, the paper proposes **WebLearner**, an RL-based GUI agent with a hierarchical memory design:
@@ -101,3 +80,24 @@ The model is optimized with reinforcement learning and multi-part rewards that e
 ## Takeaway
 
 This paper frames web agent generalization as a **tutorial-following** problem rather than a pure memorization problem. Its main contribution is not only a stronger agent, but also a clearer evaluation setting: if an agent truly understands how to use external multimodal guidance, it should be able to transfer that capability to websites it has never seen before.
+
+## 📂 Repository Structure
+```text
+.
+├── assets/                  # Images, figures, and static assets for README/documentation
+├── dataset_construction/    # Codebase for data curation and tutorial distillation
+│   ├── pipeline/            # "Capture-and-Refine" pipeline implementation
+│   ├── annotation/          # Human demonstration and trajectory filter scripts
+│   └── templates/           # Proforma templates for image-text interleaving
+├── evaluation/              # Benchmark evaluation scripts and metrics calculation
+│   ├── evaluators/          # Domain-specific scoring functions (e-commerce, travel, etc.)
+│   ├── run_eval.sh          # Batch evaluation entry point
+│   └── statistics.py        # Error analysis and success rate calculators
+└── weblearner/              # Core source code of the WebLearner Agent
+    ├── agent/               # Actor-critic network definition and model wrappers
+    ├── memory/              # Hierarchical memory system (Buffer, Tracker, KB)
+    ├── rl/                  # Reinforcement learning training loops and reward functions
+    └── configs/             # Hyperparameters and training configuration files
+```
+
+
