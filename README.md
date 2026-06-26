@@ -12,13 +12,17 @@ $^{1}$ **Tsinghua University** &nbsp;&nbsp; $^{2}$ **Shanghai AI Lab** &nbsp;&nb
 
 <sup>*</sup> Equal Contribution &nbsp;&nbsp; <sup>+</sup> corresponding authors
 
+<br>
+
+<sup>*</sup> Equal Contribution &nbsp;&nbsp; <sup>+</sup> Corresponding Authors
+
 ---
 
-## 🔗 Quick Links
-
-* 📄 **[arXiv Paper](https://arxiv.org/abs/URL_HERE)**
-* 📊 **[WebOne Dataset](https://huggingface.co/datasets/URL_HERE)**
-* 🤖 **[WebLearner Models](https://huggingface.co/models/URL_HERE)**
+<p align="center">
+    🔗 <b>[<a href="https://arxiv.org/abs/URL_HERE">arXiv Paper</a>]</b> 
+    &nbsp;&nbsp;&nbsp;&nbsp;📊 <b>[<a href="https://huggingface.co/datasets/URL_HERE">WebOne Dataset</a>]</b> 
+    &nbsp;&nbsp;&nbsp;&nbsp;🤖 <b>[<a href="https://huggingface.co/models/URL_HERE">WebLearner Models</a>]</b>
+</p>
 
 ---
 
