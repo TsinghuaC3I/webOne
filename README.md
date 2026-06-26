@@ -6,9 +6,9 @@
 
 ---
 
-Xinwei Long<sup>1</sup>, Kai Tian<sup>1</sup>, Peng Xu<sup>1</sup>, Weibo Gao<sup>3</sup>, Yihua Shao<sup>4</sup>, Guoli Jia<sup>1</sup>, Haozhe Geng<sup>3</sup>, Sa Yang<sup>3</sup>, Jingxuan Li<sup>6</sup>, Huayong Hu<sup>6</sup>, Kaiyan Zhang<sup>1</sup>, Jiaqi Wang<sup>2</sup>, Bowen Zhou<sup>1,2</sup>
+Xinwei Long<sup>1*</sup>, Kai Tian<sup>1*</sup>, Peng Xu<sup>1</sup>, Weibo Gao<sup>3</sup>, Yihua Shao<sup>4</sup>, Guoli Jia<sup>1</sup>, Haozhe Geng<sup>3</sup>, Sa Yang<sup>3</sup>, Jingxuan Li<sup>6</sup>, Huayong Hu<sup>6</sup>, Kaiyan Zhang<sup>1</sup>, Jiaqi Wang<sup>2+</sup>, Bowen Zhou<sup>1,2+</sup>
 
-$^{1}$ **Tsinghua University** &nbsp;&nbsp; $^{2}$ **Shanghai AI Lab** &nbsp;&nbsp; $^{3}$ **Peking University** &nbsp;&nbsp; $^{4}$ **USTC** &nbsp;&nbsp; $^{5}$ **CASIA** &nbsp;&nbsp; $^{6}$ **Independent Researcher**
+$^{1}$ **Tsinghua University** &nbsp;&nbsp; $^{2}$ **Shanghai AI Lab** &nbsp;&nbsp; $^{3}$ **Peking University** &nbsp;&nbsp; $^{4}$ **USTC** &nbsp;&nbsp; $^{5}$ **CASIA** &nbsp;&nbsp; $^{6}$ **Independent Researcher** <sup>*</sup> Equal Contribution &nbsp;&nbsp; <sup>+</sup> corresponding authors
 
 ---
 
