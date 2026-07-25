@@ -110,3 +110,42 @@ The inference code is in the `inference/` folder. The released test file is `tes
 | WebLearner with guidebook | `inference/run_realweb_ours_grpo.py` | The model additionally reads a relevant multimodal guidebook and uses the interaction history to plan the next action. |
 
 Switching between modes only requires running the corresponding Python file. 
+
+### Mode 1: Inference Without a Guidebook
+
+The entry point is `inference/run_realweb.py`. 
+Start the model server first, then run:
+
+```bash
+PYTHONPATH="$PWD:$PWD/utils" python inference/run_realweb.py \
+  --test_file testset/alltest.json \
+  --api_model YOUR_SERVED_MODEL_NAME \
+  --output_dir results/without_guidebook \
+  --evaluation_name baseline \
+  --max_iter 15 \
+  --download_dir downloads
+```
+
+The results are saved under `results/without_guidebook/baseline/`. Each task has its own `task<id>/` folder.
+
+### Mode 2: WebLearner Inference With a Guidebook
+
+The entry point is `inference/run_realweb_ours_grpo.py`. This mode requires files that are not included in this repository snapshot:
+
+- a local Qwen3-VL checkpoint;
+- guidebooks under `guidebooks/<website>/<tutorial_name>/guidebook2.json`;
+- screenshots referenced by those guidebooks.
+
+After preparing these files and updating the checkpoint paths in `inference/run_realweb_ours_grpo.py`, run:
+
+```bash
+PYTHONPATH="$PWD:$PWD/utils" python inference/run_realweb_ours_grpo.py \
+  --test_file testset/alltest.json \
+  --output_dir results/guidebook \
+  --evaluation_name weblearner \
+  --max_iter 15 \
+  --download_dir downloads
+```
+
+The results are saved under `results/guidebook/weblearner/`. Each task has its own `task<new_id>/` folder.
+
