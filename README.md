@@ -102,7 +102,7 @@ This paper frames web agent generalization as a **tutorial-following** problem r
 
 ## Inference
 
-The inference code is in the `inference/` folder. The released test file is `testset/alltest.json`, which contains 570 tasks. There are two inference modes:
+The inference code is in the `inference/` folder. The released test file is `testset/alltest.json`. There are two inference modes:
 
 | Mode | Entry point | Description |
 | --- | --- | --- |
