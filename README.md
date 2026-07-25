@@ -117,7 +117,7 @@ The entry point is `inference/run_realweb.py`.
 Start the model server first, then run:
 
 ```bash
-PYTHONPATH="$PWD:$PWD/utils" python inference/run_realweb.py \
+python inference/run_realweb.py \
   --test_file testset/alltest.json \
   --api_model YOUR_SERVED_MODEL_NAME \
   --output_dir results/without_guidebook \
@@ -139,7 +139,7 @@ The entry point is `inference/run_realweb_ours_grpo.py`. This mode requires file
 After preparing these files and updating the checkpoint paths in `inference/run_realweb_ours_grpo.py`, run:
 
 ```bash
-PYTHONPATH="$PWD:$PWD/utils" python inference/run_realweb_ours_grpo.py \
+python inference/run_realweb_ours_grpo.py \
   --test_file testset/alltest.json \
   --output_dir results/guidebook \
   --evaluation_name weblearner \
