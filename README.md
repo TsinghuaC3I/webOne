@@ -100,4 +100,13 @@ This paper frames web agent generalization as a **tutorial-following** problem r
     └── configs/             # Hyperparameters and training configuration files
 ```
 
+## Inference
 
+The inference code is in the `inference/` folder. The released test file is `testset/alltest.json`, which contains 570 tasks. There are two inference modes:
+
+| Mode | Entry point | Description |
+| --- | --- | --- |
+| Without guidebook | `inference/run_realweb.py` | The model completes each web task using the current screenshot and accessibility tree, without tutorial guidance. |
+| WebLearner with guidebook | `inference/run_realweb_ours_grpo.py` | The model additionally reads a relevant multimodal guidebook and uses the interaction history to plan the next action. |
+
+Switching between modes only requires running the corresponding Python file. 
