@@ -149,3 +149,11 @@ python inference/run_realweb_ours_grpo.py \
 
 The results are saved under `results/guidebook/weblearner/`. Each task has its own `task<new_id>/` folder.
 
+### Where to Find the Inference Results
+
+The complete result path is:
+
+```text
+<output_dir>/<evaluation_name>/task<task_id>/
+```
+
