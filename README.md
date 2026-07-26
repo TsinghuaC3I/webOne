@@ -157,3 +157,17 @@ The complete result path is:
 <output_dir>/<evaluation_name>/task<task_id>/
 ```
 
+## Training
+
+The GRPO training code is in the `train/` folder. It is adapted from [EasyR1](https://github.com/hiyouga/easyr1) for WebOne/WebLearner training. 
+
+The main files are:
+
+- `train/main.py`: training entry point;
+- `train/examples/config_fullmodel.yaml`: WebOne/WebLearner GRPO configuration;
+- `train/examples/reward_function/webone_reward.py`: reward function for action format, guidebook reference, and final-answer supervision.
+
+```bash
+python main.py
+```
+
