@@ -11,7 +11,7 @@ $^{1}$ Tsinghua University &nbsp;&nbsp; $^{2}$ Shanghai AI Lab &nbsp;&nbsp; $^{3
 <sup>*</sup> Equal Contribution &nbsp;&nbsp; <sup>+</sup> Corresponding Authors
 
 <p align="center">
-    🔗 <b>[<a href="https://arxiv.org/abs/URL_HERE">arXiv Paper</a>]</b> 
+    🔗 <b>[<a href="https://github.com/TsinghuaC3I/webOne/blob/main/Paper/paper.pdf">Paper</a>]</b> 
     &nbsp;&nbsp;&nbsp;&nbsp;📊 <b>[<a href="https://cloud.tsinghua.edu.cn/d/0276ed53f9bb49e7b7cf/">WebOne Dataset</a>]</b> 
     &nbsp;&nbsp;&nbsp;&nbsp;🤖 <b>[<a href="https://huggingface.co/models/URL_HERE">WebLearner Models</a>]</b>
 </p>
